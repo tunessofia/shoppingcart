@@ -62,7 +62,8 @@ module.exports = (env, options) => {
         template: templateHtmlPath,
         minify: true,
         filename: 'index.html',
-        title: 'Store App'
+        title: 'Store App',
+        inject: false 
       })
     ]
   }

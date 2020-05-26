@@ -1,6 +1,5 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { connect } from "react-redux";
-import { bindActionCreators } from 'redux';
 import { fetchProductsPending } from '../actions';
 import {getProductsError, getProducts, getProductsPending} from '../reducers';
 
@@ -74,8 +73,10 @@ const mapStateToProps = state => ({
     pending: getProductsPending(state)
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators({
+const mapDispatchToProps = dispatch => {
+  return {
     fetchProducts: () => dispatch(fetchProductsPending())
-}, dispatch)
+  }  
+}
 
 export const ProductsViewConnected = connect(mapStateToProps, mapDispatchToProps)(ProductsView);

@@ -3,8 +3,7 @@ import {FETCH_PRODUCTS_PENDING, fetchProductsSuccess, fetchProductsError} from '
 
 // watcher saga: watches for actions dispatched to the store, starts worker saga
 export function* watcherSaga() {
-  ;
-    yield takeLatest(FETCH_PRODUCTS_PENDING, workerSaga);
+  yield takeLatest(FETCH_PRODUCTS_PENDING, workerSaga);
 }
 
 // worker saga: makes the api call when watcher saga sees the action
@@ -18,16 +17,10 @@ function* workerSaga() {
   };
 
   try {
-    ;
     const products = yield call(() =>
       fetch('http://localhost:3000/products', myInit)
         .then(response => {
-          var contentType = response.headers.get("content-type");
-          if(contentType && contentType.indexOf("application/json") !== -1) {
-            return response.json()
-          } else {
-            console.log("Oops, we haven't got JSON!");
-          }
+          return response.json()
         }
       )
     );

@@ -9,10 +9,9 @@ export const initialState = {
 export function rootReducer(state = initialState, action) {
     switch(action.type) {
         case FETCH_PRODUCTS_PENDING: 
-            return {
-                ...state,
-                pending: true
-            }
+        return Object.assign({}, state, {
+            pending: true
+          })
         case FETCH_PRODUCTS_SUCCESS:
             ;
             return {

@@ -13,7 +13,7 @@ function srcPath() {
   return absPath.apply(this, args);
 }
 
-const indexJsPath = srcPath('index,js');
+const indexJsPath = srcPath('index.js');
 const templateHtmlPath = absPath('resources', 'template.html');
 const indexHtmlOutputPath = absPath('public', 'index.html');
 const bundleOutputPath = absPath('public');
@@ -47,9 +47,7 @@ module.exports = (env, options) => {
       new HtmlWebPackPlugin({
         template: templateHtmlPath,
         filename: indexHtmlOutputPath,
-        minify: true,
-        inject: false,
-        hash: true
+        title: 'Store App'
       })
     ]
   }

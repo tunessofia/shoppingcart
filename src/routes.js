@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Switch, Redirect } from "react-router-dom";
-import { BeerComponent } from "./beer/main.js";
+import { BeerComponent } from "./components/beer.js";
 
 export const App = () => {
     

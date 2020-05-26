@@ -4,8 +4,8 @@ import {HashRouter} from "react-router-dom";
 import {App} from "./routes.js";
 
 ReactDOM.render(
-  (<HashRouter>
+  <HashRouter>
     <App/>
-  </HashRouter>),
+  </HashRouter>,
   document.getElementById('root')
 );

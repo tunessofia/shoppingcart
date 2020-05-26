@@ -2,6 +2,8 @@
 
 const path = require('path');
 const HtmlWebPackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 function absPath() {
   let tmp = [__dirname].concat(Array.prototype.slice.call(arguments));
@@ -30,7 +32,7 @@ module.exports = (env, options) => {
     },
     mode: options.mode,
     resolve: {
-      extensions: ['.js', '.json', '.jsx']
+      extensions: ['.js', '.json', '.jsx', '.scss']
     },
     module: {
       rules: [
@@ -40,13 +42,26 @@ module.exports = (env, options) => {
           use: {
             loader: "babel-loader"
           }
-        }
+        },
+        {
+          test: /\.(sc|c)ss$/,
+          use: [
+            MiniCssExtractPlugin.loader,
+            'css-loader',
+            'sass-loader'
+          ]
+        },
       ]
     },
     plugins: [
+      new MiniCssExtractPlugin({
+        filename: isDevelopment ? '[name].css' : '[name].[hash].css'
+      }),
+      new OptimizeCSSAssetsPlugin({}),
       new HtmlWebPackPlugin({
         template: templateHtmlPath,
-        filename: indexHtmlOutputPath,
+        minify: true,
+        filename: 'index.html',
         title: 'Store App'
       })
     ]

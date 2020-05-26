@@ -1,0 +1,42 @@
+// Needed functions in order to build the BS
+@import '../../node_modules/bootstrap/scss/functions';
+
+// Custom Fonts
+@import 'fonts';
+
+// Custom BS variables
+@import 'custom-variables';
+// Custom BS build
+@import 'custom-bootstrap';
+
+// Import styles
+@import 'base';
+
+// Customizations to BS
+@import 'buttons';
+
+// Custom Sidebar
+@import 'navbar';
+@import 'pagination';
+
+#screen {
+  height: 100%
+}
+
+.layout-full {
+  .login {
+    background-color: $gray-700;
+    .login-form-container {
+      padding: 3.125rem;
+      background: $gray-100;
+      max-width: 370px;
+    }
+    svg, object {
+      width: 179px;
+      height: 37px;
+      display: block;
+      fill: theme-color("primary");
+      margin: 0 auto 1.875rem;
+    }
+  }
+}

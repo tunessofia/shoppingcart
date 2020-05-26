@@ -1,0 +1,46 @@
+{
+  "products": [
+    { "id": 1,
+      "title": "Cerveja Sem Álcool Preta",
+      "description":"emb. 6x33cl",
+      "brand": "Super Bock",
+      "price": "3.59",
+      "stock": 5 
+    },
+    { "id": 2,
+      "title": "Cerveja Com Álcool Ruiva",
+      "description":"emb. 6x33cl",
+      "brand": "Super Bock Abadia",
+      "price": "3.89",
+      "stock": 5 
+    },
+    { "id": 3,
+      "title": "Cerveja Com Álcool",
+      "description":"garrafa 1lt",
+      "brand": "Sagres",
+      "price": "1.89",
+      "stock": 1 
+    },
+    { "id": 4,
+      "title": "Cerveja Com Álcool",
+      "description":"garrafa 1lt",
+      "brand": "Gutbier",
+      "price": "0.89",
+      "stock": 0  
+    },
+    { "id": 5,
+      "title": "Cerveja Com Álcool",
+      "description":"garrafa 50cl",
+      "brand": "Erdinger",
+      "price": "2.89",
+      "stock": 20 
+    },
+    { "id": 6,
+      "title": "Cerveja Com Álcool",
+      "description":"garrafa 33cl",
+      "brand": "Duvel",
+      "price": "3.65",
+      "stock": 10 
+    }
+  ]
+}

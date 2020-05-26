@@ -3,14 +3,26 @@
 const path = require('path');
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 
-const indexJs = './src/index.js';
-const bundleOutputPath = __dirname + './public/';
+function absPath() {
+  let tmp = [__dirname].concat(Array.prototype.slice.call(arguments));
+  return path.join.apply(path, tmp);
+}
+
+function srcPath() {
+  let args = ['src'].concat(Array.prototype.slice.call(arguments));
+  return absPath.apply(this, args);
+}
+
+const indexJsPath = srcPath('index,js');
+const templateHtmlPath = absPath('resources', 'template.html');
+const indexHtmlOutputPath = absPath('public', 'index.html');
+const bundleOutputPath = absPath('public');
 
 module.exports = (env, options) => {
   const isDevelopment = options.mode === 'development';
   return {
     entry: {
-      main: indexJs
+      main: indexJsPath
     },
     output: {
       path: bundleOutputPath,
@@ -33,8 +45,11 @@ module.exports = (env, options) => {
     },
     plugins: [
       new HtmlWebPackPlugin({
-        template: "./src/index.html",
-        filename: "./index.html"
+        template: templateHtmlPath,
+        filename: indexHtmlOutputPath,
+        minify: true,
+        inject: false,
+        hash: true
       })
     ]
   }

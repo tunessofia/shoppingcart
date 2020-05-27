@@ -1,10 +1,8 @@
 export const FETCH_PRODUCTS_PENDING = 'FETCH_PRODUCTS_PENDING';
 export const FETCH_PRODUCTS_SUCCESS = 'FETCH_PRODUCTS_SUCCESS';
 export const FETCH_PRODUCTS_ERROR = 'FETCH_PRODUCTS_ERROR';
-export const FETCH_PRODUCT = 'FETCH_PRODUCT';
-export const ADD_TO_CART = 'ADD_TO_CART';
-export const ADD_TO_CART_ERROR = 'ADD_TO_CART_ERROR';
-export const ADD_QUANTITY = 'ADD_QUANTITY';
+export const FETCH_PRODUCT_TO_CART = 'FETCH_PRODUCT';
+export const ADD_PRODUCT_TO_CART = 'ADD_TO_CART';
 
 export function fetchProductsPending() {
     return {
@@ -26,31 +24,17 @@ export function fetchProductsError(error) {
   }
 }
 
-export function fetchProduct(productId) {
+export function fetchProductToCart(productId) {
     return {
-        type: FETCH_PRODUCT,
+        type: FETCH_PRODUCT_TO_CART,
         productId: productId
     }
 }
 
-export function onAddToCart(product) {
+export function addProductToCart(product) {
     return {
-        type: ADD_TO_CART,
+        type: ADD_PRODUCT_TO_CART,
         payload: product
     }
 }
 
-export function addToCartError(error) {
-    return {
-        type: ADD_TO_CART_ERROR,
-        error: error
-    }
-}
-
-export function addQuantity(quantity, productId){
-    
-    return {
-        type: ADD_QUANTITY,
-        payload: { quantity: quantity, productId: productId }
-    }
-}

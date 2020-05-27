@@ -24,7 +24,7 @@ export function rootReducer(state = initialState, action) {
                 pending: false,
                 error: action.error
             });    
-        case ADD_TO_CART: {
+        case ADD_PRODUCT_TO_CART: {
             
             const addedProducts = Object.assign([], state.addedProducts);
             const productIdx = addedProducts.map(e => e.id).indexOf(action.payload.id);

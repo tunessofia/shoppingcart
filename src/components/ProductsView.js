@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { connect } from "react-redux";
-import { fetchProductsPending, fetchProduct, onAddToCart } from '../actions';
-import {getProductsError, getProducts, getProductsPending, getAddedProducts} from '../reducers';
+import { fetchProductsPending, fetchProductToCart, addProductToCart } from '../actions/products';
+import { getProductsError, getProducts, getProductsPending, getAddedProducts} from '../reducers';
 import { CartBriefConnected } from "./CartBrief";
 
 const ProductList = ({ products, onAddToCart }) => {
@@ -91,8 +91,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => {
   return {
     fetchProducts: () => dispatch(fetchProductsPending()),
-    fetchProduct: (productId) => dispatch(fetchProduct(productId)),
-    onAddToCart: (product) => dispatch(onAddToCart(product))
+    fetchProduct: (productId) => dispatch(fetchProductToCart(productId)),
+    onAddToCart: (product) => dispatch(addProductToCart(product))
   }  
 }
 

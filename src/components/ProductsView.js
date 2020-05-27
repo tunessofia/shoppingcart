@@ -1,14 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { connect } from "react-redux";
-import { fetchProductsPending } from '../actions';
-import {getProductsError, getProducts, getProductsPending} from '../reducers';
+import { fetchProductsPending, fetchProduct, onAddToCart } from '../actions';
+import {getProductsError, getProducts, getProductsPending, getAddedProducts} from '../reducers';
+import { CartBriefConnected } from "./CartBrief";
 
-const ProductList = ({ products }) => {
+const ProductList = ({ products, onAddToCart }) => {
     
     const renderList = () => {
         return (<ul>
             {
-                products.map((el, idx) => (
+                products.map((el, idx) => {    
+                return (
                     <li key={idx}>
                         <div >
                             {el.title} - {el.brand}
@@ -17,10 +19,10 @@ const ProductList = ({ products }) => {
                             {el.description} {el.price} {el.quantity ? ` x ${el.quantity}` : null}
                         </div>
                         <div>
-                            <button>comprar</button>
+                            {el.stock && (<button onClick={() => onAddToCart(el.id)}>buy</button>) || 'sold out'}
                         </div>
                     </li>
-                ))
+                )})
             }
         </ul>
         );
@@ -41,41 +43,56 @@ const ProductList = ({ products }) => {
     );
 }
 
-class ProductsView extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
-    componentDidMount() {
-        const {fetchProducts} = this.props;
+const ProductsView = (props) => {
+    useEffect(() => {
+        const { fetchProducts } = props;
         fetchProducts();
+    }, []);
+
+    const onAddToCart = (productId) => {
+        const { addedProducts } = props;
+        const productIdx = addedProducts.map(e => e.id).indexOf(productId);
+            if ( productIdx === -1) {
+                const { fetchProduct } = props;
+                fetchProduct(productId);
+            }
+            else {
+                const { onAddToCart } = props;
+                onAddToCart(addedProducts[productIdx]);
+            }
     }
 
-    render() {
-        const {pending, products, error} = this.props;
+    const { pending, products, error } = props;
 
-        if(pending){
-            return <p>loading...</p>
-        } 
+    if (pending) {
+        return (<p>loading...</p>);
+    }
 
-        return (
-            <div className='product-list-wrapper'>
-                {error && <span className='product-list-error'>{error}</span>}
-                <ProductList products={products} />
+    return (
+        <div className="row">
+            <div className='col-7'>
+                <ProductList products={products} onAddToCart={onAddToCart}/>
+                {error && <span className='product-list-error'>An error ocurred</span>}
             </div>
-        )
-    }
+            <div className="col-5">
+                <CartBriefConnected />
+            </div>
+        </div>
+    )
 }
 
 const mapStateToProps = state => ({
     error: getProductsError(state),
     products: getProducts(state),
-    pending: getProductsPending(state)
+    pending: getProductsPending(state),
+    addedProducts: getAddedProducts(state)
 })
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchProducts: () => dispatch(fetchProductsPending())
+    fetchProducts: () => dispatch(fetchProductsPending()),
+    fetchProduct: (productId) => dispatch(fetchProduct(productId)),
+    onAddToCart: (product) => dispatch(onAddToCart(product))
   }  
 }
 

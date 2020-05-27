@@ -30,7 +30,11 @@ module.exports = (env, options) => {
       path: bundleOutputPath,
       filename: isDevelopment ? 'bundle.js' : 'bundle.[contenthash].js',
     },
+    performance: {
+      hints: false
+    },
     mode: options.mode,
+    devtool: isDevelopment ? 'cheap-module-eval-source-map' : false,
     resolve: {
       extensions: ['.js', '.json', '.jsx', '.scss']
     },
@@ -39,8 +43,28 @@ module.exports = (env, options) => {
         {
           test: /\.(js|jsx)$/,
           exclude: /node_modules/,
-          use: {
-            loader: "babel-loader"
+          loader: "babel-loader",
+          options: {
+            presets: [
+              [
+                '@babel/preset-env',
+                {
+                  modules: false,
+                  targets: {
+                    browsers: ['last 2 chrome versions']
+                  }
+                }
+              ],
+              '@babel/preset-react'
+            ],
+            plugins: [
+              [require('babel-plugin-transform-imports'), {
+                "react-bootstrap": {
+                  transform: "react-bootstrap/lib/${member}",
+                  preventFullImport: true
+                }
+              }]
+            ]
           }
         },
         {

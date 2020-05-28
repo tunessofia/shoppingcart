@@ -1,9 +1,9 @@
 import { call, put } from "redux-saga/effects";
 import { fetchProductsSuccess, fetchProductsError, onAddToCart, addToCartError } from '../actions/';
-import {GET} from "./headers";
+import { GET } from "./api";
 
 // worker saga: makes the api call when watcher saga sees the action
-export function* workerSagaFetchProducts() {  
+export default function* workerSagaFetchProducts() {  
     try {
       const products = yield call(() =>
         fetch('http://localhost:3000/products', GET)

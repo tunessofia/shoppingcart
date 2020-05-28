@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
-import { Route, Switch, Redirect } from "react-router-dom";
-import { ProductsViewConnected } from "./components/ProductsView";
+import { Route, Switch } from "react-router-dom";
+import { MainViewConnected } from "./components/Main";
 import { TopNavbar } from './components/Navbar.js';
 
 export const AppLayout = (route, componentToRender) => {
@@ -19,14 +19,10 @@ export const AppLayout = (route, componentToRender) => {
   );
 }
   
-export const AppRoutes = () => {
-  const mainEndpoint = "/store";
-  const homepage = mainEndpoint + "/products";
-
+export const App = () => {
   return (
     <Switch>
-      <Route path={homepage} render={route =>  (AppLayout(route, ProductsViewConnected))} />
-      <Redirect exact from="/" to={homepage} />
+      <Route path="/" render={route =>  (AppLayout(route, MainViewConnected))} />
     </Switch>
   );
 }

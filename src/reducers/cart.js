@@ -1,7 +1,7 @@
 import { ADD_ITEM, REMOVE_ITEM, CHANGE_ITEM_QUANTITY } from '../actions/cart';
 
 const addItem = (state, item) => {
-    const cart = Object.assign([], state.cart);
+    const cart = Object.assign([], state);
     const itemIdx = cart.map(e => e.id).indexOf(item.id);
     if ( itemIdx !== -1) {
         cart[itemIdx].quantity +=1; 
@@ -11,33 +11,28 @@ const addItem = (state, item) => {
         cart.push(item)
     }
 
-    return Object.assign({}, state, {
-        cart: cart
-    });
+    return cart;
 }
 
 const removeItem = (state, item) => {
-    const cart = Object.assign([], state.cart);
-    const itemIdx = cart.map(e => e.id).indexOf(item.id);
+    debugger;
+    const cart = Object.assign([], state);
+    const itemIdx = cart.map(e => e.id).indexOf(item);
     if ( itemIdx !== -1) {
         cart.splice(itemIdx,1); 
     }
 
-    return Object.assign({}, state, {
-        cart: cart
-    });
+    return cart;
 }
 
 const changeItemQuantity = (state, data) => {
-    const cart = Object.assign([], state.cart);
+    const cart = Object.assign([], state);
     const itemIdx = cart.map(e => e.id).indexOf(data.itemId);
     cart[itemIdx].quantity = parseInt(data.quantity);
-    return Object.assign({}, state, {
-        cart: cart
-    });
+    return cart;
 }
 
-export function shoppingCart(state = {}, action) {
+export default function shoppingCart(state = [], action) {
     switch (action.type) {
         case ADD_ITEM: {
             return addItem(state, action.payload.itemId);    
@@ -49,7 +44,7 @@ export function shoppingCart(state = {}, action) {
             return changeItemQuantity(state, action.payload);     
         }
         default:
-            return Object.assign({}, state);
+            return Object.assign([], state);
     }
 }
 

@@ -1,6 +1,5 @@
 import React from 'react'
-
-export default ProductList = ({ products, onAddToCart }) => {
+export const ProductList = ({ products, onAddToCart }) => {
     
     const renderList = () => {
         return (<ul>

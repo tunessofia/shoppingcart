@@ -1,21 +1,22 @@
 import React from "react";
 import { connect } from "react-redux";
 import { useHistory } from 'react-router-dom';
-
 import { getCart } from '../reducers/cart';
-import { changeItemQuantity } from '../actions/cart';
+import { changeItemQuantity, removeItem } from '../actions/cart';
+import { debounce } from '../debouncer';
 
+const debounceTime = 300;
 const Cart = (props) => {
     const { cart } = props;
     let totalCart = cart.reduce((acc, el) => acc + (parseFloat(el.price) * el.quantity), 0);
     
+    const history = useHistory();
     const handleCheckout = () => {
-        const history = useHistory();
-        history.push("/checkout");
+        history.push("checkout");
     }
 
     const renderCart = () => {
-        const { changeQuantity } = props;
+        const { changeQuantity, removeItem } = props;
         const items = cart.map((el, idx) => {
             return (
                 <div key={idx}>
@@ -37,6 +38,9 @@ const Cart = (props) => {
                             <input type="number" onChange={(e) => changeQuantity(e.target.value, el.id)} value={el.quantity} />
                         </div>
                         <div className="col-md-1">
+                            <button onClick={() => removeItem(el.id)}>Remove</button>
+                        </div>
+                        <div className="col-md-1">
                             <span>Price</span> 
                         </div>
                         <div className="col-md-1">
@@ -55,7 +59,7 @@ const Cart = (props) => {
     }
 
     return (
-        <div style={styles.fixed}>
+        <div>
             <h2>{'Cart'}</h2>
             <div>
                 <div className="row">
@@ -67,7 +71,7 @@ const Cart = (props) => {
                     </span>
                 </div>
                 <div className="row">
-                    <button onClick={handleCheckout}>Checkout</button>
+                    { cart.length>0 && <button onClick={handleCheckout}>Checkout</button> }
                 </div>
             </div>
         </div>
@@ -79,9 +83,10 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => {
-  return {
-    changeQuantity : (quantity, productId) => dispatch(changeItemQuantity(quantity, productId)),
-  }  
+    return {
+        changeQuantity: (quantity, productId) => debounce(() => dispatch(changeItemQuantity(quantity, productId)), debounceTime),
+        removeItem: (productId) => dispatch(removeItem(productId))
+    }
 }
 
-export default CartConnected = connect(mapStateToProps, mapDispatchToProps)(Cart);
+export const CartConnected = connect(mapStateToProps, mapDispatchToProps)(Cart);

@@ -38,6 +38,11 @@ module.exports = (env, options) => {
     resolve: {
       extensions: ['.js', '.json', '.jsx', '.scss']
     },
+    devServer: {
+      historyApiFallback: true,
+      contentBase: './',
+      hot: true
+    },
     module: {
       rules: [
         {

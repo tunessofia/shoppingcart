@@ -1,5 +1,5 @@
-export const ADD_ITEM_QUANTITY    = 'ADD_ITEM_QUANTITY';
-export const REMOVE_ITEM_QUANTITY = 'REMOVE_ITEM_QUANTITY';
+export const ADD_ITEM   = 'ADD_ITEM';
+export const REMOVE_ITEM = 'REMOVE_ITEM';
 export const CHANGE_ITEM_QUANTITY = 'CHANGE_ITEM_QUANTITY';
 
 export function addItem(itemId){

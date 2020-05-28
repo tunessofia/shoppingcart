@@ -1,6 +1,12 @@
-import { FETCH_PRODUCTS_PENDING, FETCH_PRODUCTS_SUCCESS, FETCH_PRODUCTS_ERROR } from '../actions';
+import { FETCH_PRODUCTS_PENDING, FETCH_PRODUCTS_SUCCESS, FETCH_PRODUCTS_ERROR } from '../actions/products';
 
-export function products(state = {}, action) {
+const initState = {
+    products: [],
+    pending: false,
+    error: false
+}
+
+export default function products(state = initState, action) {
     switch (action.type) {
         case FETCH_PRODUCTS_PENDING:
             return Object.assign({}, state, {
@@ -21,7 +27,7 @@ export function products(state = {}, action) {
     }
 }
 
-export const getProducts = state => state.products;
-export const getProductsPending = state => state.pending;
-export const getProductsError = state => state.error;
+export const getProducts = state => state.products.products;
+export const getProductsPending = state => state.products.pending;
+export const getProductsError = state => state.products.error;
 

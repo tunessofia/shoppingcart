@@ -3,7 +3,7 @@ import React from 'react';
 export const TopNavbar = () => {
 
     const goToHomePage = () => {
-      this.props.history.push('/store/beer');
+      
     }
   
     return (

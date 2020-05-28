@@ -1,5 +1,5 @@
 import { call, put } from "redux-saga/effects";
-import { fetchProductsSuccess, fetchProductsError, onAddToCart, addToCartError } from '../actions/';
+import { fetchProductsSuccess, fetchProductsError } from '../actions/products';
 import { GET } from "./api";
 
 // worker saga: makes the api call when watcher saga sees the action

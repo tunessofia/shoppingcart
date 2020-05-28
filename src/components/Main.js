@@ -3,16 +3,18 @@ import { connect } from "react-redux";
 import { fetchProductsPending } from '../actions/products';
 import { addItem } from '../actions/cart';
 import { getProductsError, getProducts, getProductsPending } from '../reducers/products';
-import CartConnected from "./Cart";
-import ProductList  from "./ProductsList";
+import { CartConnected } from "./Cart";
+import { ProductList }  from "./ProductsList";
+import { debounce } from '../debouncer';
 
+const debounceTime = 300;
 const MainView = (props) => {
     useEffect(() => {
         const { fetchProducts } = props;
         fetchProducts();
     }, []);
 
-    const { pending, products, error } = props;
+    const { onAddToCart, pending, products, error } = props;
 
     if (pending) {
         return (<p>loading...</p>);
@@ -40,7 +42,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => {
   return {
     fetchProducts: () => dispatch(fetchProductsPending()),
-    onAddToCart: (product) => dispatch(addItem(product))
+    onAddToCart: (product) => debounce(() => dispatch(addItem(product)), debounceTime)
   }  
 }
 

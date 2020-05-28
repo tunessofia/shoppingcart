@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { MainViewConnected } from "./components/Main";
 import { TopNavbar } from './components/Navbar.js';
 
@@ -21,8 +21,10 @@ export const AppLayout = (route, componentToRender) => {
   
 export const App = () => {
   return (
-    <Switch>
-      <Route path="/" render={route =>  (AppLayout(route, MainViewConnected))} />
-    </Switch>
+    <Router>
+      <Switch>
+        <Route path="/" render={route => (AppLayout(route, MainViewConnected))} />
+      </Switch>
+    </Router>
   );
 }

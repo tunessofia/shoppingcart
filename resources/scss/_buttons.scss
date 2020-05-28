@@ -131,3 +131,19 @@
     }
   }
 }
+
+.btn-primary {
+  background-color: theme-color("primary");
+  border-color: theme-color("primary");
+  color: $white;
+  &:hover,
+  &:focus,
+  &:active { 
+    background-color: theme-color("primary-dark");
+    border-color: theme-color("primary-dark");
+    color: $white;
+    svg {
+      fill: $white;
+    }
+  }
+}

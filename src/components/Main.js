@@ -22,12 +22,16 @@ const MainView = (props) => {
 
     return (
         <div className="row">
-            <div className='col-7'>
-                <ProductList products={products} onAddToCart={onAddToCart}/>
+            <div className="col-9 theme-content-light">
+                <ProductList products={products} onAddToCart={onAddToCart} />
                 {error && <span className='product-list-error'>An error ocurred</span>}
             </div>
-            <div className="col-5">
-                <CartConnected />
+            <div className="col-3">
+                <div className="card ">
+                    <div className="ant-card ant-card-bordered theme-content-light">
+                        <CartConnected />
+                    </div>
+                </div>
             </div>
         </div>
     )

@@ -1,25 +1,45 @@
 import React from 'react'
+import { Button } from 'antd';
+
 export const ProductList = ({ products, onAddToCart }) => {
     
     const renderList = () => {
-        return (<ul>
-            {
-                products.map((el, idx) => {    
-                return (
-                    <li key={idx}>
-                        <div >
-                            {el.title} - {el.brand}
+        return (<div className="row"> {
+            products.map((el, idx) => {
+                    return (
+                        <div className="col-4" key={idx}>
+                            <div className="row">
+                                <div className="col-12" align="center"> 
+                                   <img src={`./resources/images/${el.img}`} className="light"></img>
+                                </div>
+                            </div>
+                            <div className="p-10-0 row">
+                                <div className="col-12" align="center">
+                                    {el.title} - {el.brand}
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col-12" align="center">
+                                    {el.description} {el.price}
+                                </div>
+                            </div>
+                            <div className="row p-20-0 p-b-30">
+                                <div className="col-3"></div>
+                                <div className="col-6" align="center">
+                                    {el.stock &&
+                                        (<Button type="default"
+                                            shape="round"
+                                            block
+                                            onClick={() => onAddToCart(products[j])}>Buy</Button>
+                                        ) || 'Sold Out'}
+                                </div>
+                                <div className="col-3"></div>
+                            </div>
                         </div>
-                        <div>
-                            {el.description} {el.price}
-                        </div>
-                        <div>
-                            {el.stock && (<button onClick={() => onAddToCart(el)}>buy</button>) || 'sold out'}
-                        </div>
-                    </li>
-                )})
+                    )
+                })
             }
-        </ul>
+        </div>
         );
     }
 
@@ -29,10 +49,12 @@ export const ProductList = ({ products, onAddToCart }) => {
     }
 
     return (
-        <div>
-            <h3>{'Products'}</h3>
-            <div className="container">
+        <div className="p-30-50">
+            <h2>Products</h2>
+            <div className="row">
+                <div className="col-12">
                 {component}
+                </div>
             </div>
         </div>
     );

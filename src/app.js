@@ -1,18 +1,22 @@
-import React, { Fragment } from 'react';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import { MainViewConnected } from "./components/Main";
-import { TopNavbar } from './components/Navbar.js';
+import { Layout} from 'antd';
 import { CheckoutConnected } from './components/Checkout';
+const { Header, Footer, Content } = Layout;
 
 export const AppLayout = (componentToRender) => {
   const Component = componentToRender;
   return () => (
-    <Fragment>
-      <TopNavbar />
-      <div className="content">
-        <Component />
-      </div>
-    </Fragment>
+    <Layout className="layout">
+      <Header className="navbar theme-content-light navbar-expand"> 
+        <h2 className="p-0-60 d-md-block d-none"><Link to="/">Store App</Link></h2>
+      </Header>
+      <Content className="site-layout-content">
+          <Component />
+      </Content> 
+      <Footer className="theme-content-light"/> 
+    </Layout>
   );
 }
   

@@ -23,6 +23,13 @@ h2 {
     margin-left: 4.375rem;
   }
 }
+
+h2, a{
+  a:link {
+    text-decoration: none;
+  }
+}
+
 h4 {
   font-size: 1.125rem;
   font-weight: 700;
@@ -51,6 +58,108 @@ a:hover { cursor: pointer; }
 .section-title {
   border-bottom: 1px solid $gray-300;
   padding-bottom: .5rem;
+}
+
+.site-layout-content {
+  /*background-color:*/
+  padding: 70px 87px;
+  height: 100%;
+}
+
+.no-bg {
+  background-color: transparent;
+}
+
+.sider-size {
+    flex: 0 0 350px !important;
+    max-width: 350px !important;
+    min-width: 350px !important;
+    width: 350px !important;
+}
+
+.content-item-left {
+  width: 150%;
+}
+
+.content-item-right {
+  width: 50%;
+}
+
+.card {
+  width: 350px;
+  height: 100%;
+  position: relative;
+  float:right;
+  touch-action: none;
+  transform: translate(0px, 0px);
+}
+
+.p-30-50 {
+  padding: 30px 50px;
+}
+
+.p-0-60 {
+  padding: 0px 60px;
+}
+
+.p-20-0 {
+  padding: 20px 0px;
+}
+
+.p-10-0 {
+  padding: 10px 0px;
+}
+
+.p-b-30 {
+  padding-bottom: 30px;
+}
+
+.p-t-10 {
+  padding-top: 10px;
+}
+
+input[type=number]{
+  width: 100%;
+  height: 80%;
+  padding: .375rem .5rem;
+}
+
+.theme-layout-dark{
+  background-color:#000
+}
+
+.theme-layout-light {
+  background: #f8f9fa;
+}
+
+.theme-content-dark{
+    background-color: #141414;
+}
+
+.theme-content-light{
+  background-color: #fff;
+}
+
+button.ghost{
+  padding: 0;
+  border: none;
+  background: none;
+  position: absolute;
+  top: 25%;
+  transform: translateY(-50%);
+  color: #535252a4;
+  &:hover,
+  &:focus,
+  &:active {
+    color:  #1a1919d7;
+  }
+}
+
+
+
+img {
+  width: 200px;
+  height: 200px;
 }
 
 @import 'scrollbar';

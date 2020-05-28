@@ -4,6 +4,8 @@ import { useHistory } from 'react-router-dom';
 import { getCart } from '../reducers/cart';
 import { changeItemQuantity, removeItem } from '../actions/cart';
 import { debounce } from '../debouncer';
+import { Button } from 'antd';
+import { CloseOutlined } from '@ant-design/icons';
 
 const debounceTime = 300;
 const Cart = (props) => {
@@ -19,32 +21,29 @@ const Cart = (props) => {
         const { changeQuantity, removeItem } = props;
         const items = cart.map((el, idx) => {
             return (
-                <div key={idx}>
+                <div key={idx} className="p-10-0">
                     <div className="row">
-                        <div className="col-md-5">
+                        <div className="col-12">
                             {el.title} - {el.brand}
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-md-4">
-                            <span>Price {parseFloat(el.price)}/un</span>
+                        <div className="col-2">
+                            <span>Price</span>
+                        </div>
+                        <div className="col-10">
+                            <span>{parseFloat(el.price)}/un</span>
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-md-1">
-                            <span>Qtd</span>
+                        <div className="col-1">
+                            Qtd
                         </div>
-                        <div className="col-md-1">
-                            <input type="number" onChange={(e) => changeQuantity(e.target.value, el.id)} value={el.quantity} />
+                        <div className="col-6">
+                            <input className="form-control" type="number" onChange={(e) => changeQuantity(e.target.value, el.id)} value={el.quantity} />
                         </div>
-                        <div className="col-md-1">
-                            <button onClick={() => removeItem(el.id)}>Remove</button>
-                        </div>
-                        <div className="col-md-1">
-                            <span>Price</span> 
-                        </div>
-                        <div className="col-md-1">
-                            { parseFloat(parseFloat(el.price) * el.quantity).toFixed(2)}
+                        <div className="col-3">
+                            <Button className="ghost" icon={<CloseOutlined />} type="default" onClick={() => removeItem(el.id)} />
                         </div>
                     </div>
                 </div>
@@ -59,19 +58,29 @@ const Cart = (props) => {
     }
 
     return (
-        <div>
-            <h2>{'Cart'}</h2>
-            <div>
-                <div className="row">
+        <div className="p-30-50">
+            <h2>Cart</h2>
+            <div className="row">
+                <div className="col-12">
                     {renderCart()}
                 </div>
-                <div className="row">
+            </div>
+            <div className="row p-20-0">
+                <div className="col-12">
                     <span>
                         Total: {`${parseFloat(totalCart).toFixed(2)} €`}
                     </span>
                 </div>
-                <div className="row">
-                    { cart.length>0 && <button onClick={handleCheckout}>Checkout</button> }
+            </div>
+            <div className="row">
+                <div className="col-12">
+                    { cart.length>0 && 
+                        <Button type="primary" 
+                                className="btn-primary" 
+                                shape="round" 
+                                block 
+                                onClick={handleCheckout}>Checkout</Button> 
+                    }
                 </div>
             </div>
         </div>

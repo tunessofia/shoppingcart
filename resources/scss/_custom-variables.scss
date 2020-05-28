@@ -34,7 +34,8 @@ $grays: map-merge(
   $grays
 );
 
-$app-orange: #ff9e30;
+$app-orange:        #ff9e30;
+$app-orange-dark:   rgb(212, 119, 12);
 $blue-gray:         #7f8fa4;
 $blue:              #007bff;
 $indigo:            #6610f2;
@@ -52,6 +53,7 @@ $colors: ();
 $colors: map-merge(
   (
     "app-orange":        $app-orange,
+    "app-orange-dark":   $app-orange-dark,
     "blue-gray":         $blue-gray,
     "blue":              $blue,
     "indigo":            $indigo,
@@ -71,6 +73,7 @@ $colors: map-merge(
 );
 
 $primary:       $app-orange;
+$primary-dark:  $app-orange-dark;
 $secondary:     $blue-gray;
 $success:       $green;
 $info:          $cyan;
@@ -83,14 +86,15 @@ $theme-colors: ();
 // stylelint-disable-next-line scss/dollar-variable-default
 $theme-colors: map-merge(
   (
-    "primary":    $primary,
-    "secondary":  $secondary,
-    "success":    $success,
-    "info":       $info,
-    "warning":    $warning,
-    "danger":     $danger,
-    "light":      $light,
-    "dark":       $dark
+    "primary":       $primary,
+    "primary-dark":  $primary-dark,
+    "secondary":     $secondary,
+    "success":       $success,
+    "info":          $info,
+    "warning":       $warning,
+    "danger":        $danger,
+    "light":         $light,
+    "dark":          $dark
   ),
   $theme-colors
 );

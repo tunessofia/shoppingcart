@@ -4,6 +4,8 @@ import { getCart } from '../reducers/cart';
 import { changeItemQuantity, removeItem } from '../actions/cart';
 import { useHistory } from 'react-router-dom';
 import { debounce } from '../debouncer';
+import { Button } from 'antd';
+import { CloseOutlined } from '@ant-design/icons';
 
 const debounceTime = 300;
 const Checkout = (props) => {
@@ -19,33 +21,33 @@ const Checkout = (props) => {
         const { changeQuantity, removeItem } = props;
         const items = cart.map((el, idx) => {
             return (
-                <div key={idx}>
+                <div key={idx} className="p-10-0">
                     <div className="row">
-                        <div className="col-md-5">
+                        <div className="col-8">
                             {el.title} - {el.brand}
                         </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-md-4">
-                            <span>Price {parseFloat(el.price)}/un</span>
+                        <div className="col-3" align="right">
+                            <span>Price</span>
+                        </div>
+                        <div className="col-1" align="right">
+                            <span>{parseFloat(el.price)}/un</span>
                         </div>
                     </div>
-                    <div className="row">
-                        <div className="col-md-1">
-                            <span>Qtd</span>
+                    <div className="row p-t-10">
+                        <div className="col-3">
+                            <Button 
+                                className="ghost" 
+                                icon={<CloseOutlined />} 
+                                type="default" 
+                                onClick={() => removeItem(el.id)}>Remove</Button>
                         </div>
-                        <div className="col-md-1">
-                            <input type="number" onChange={(e) => changeQuantity(e.target.value, el.id)} value={el.quantity} />
+                        <div className="col-8" align="right">
+                            Qtd
                         </div>
-                        <div className="col-md-1">
-                            <button onClick={() => removeItem(el.id)}>Remove</button>
+                        <div className="col-1" align="right">
+                            <input className="form-control" type="number" onChange={(e) => changeQuantity(e.target.value, el.id)} value={el.quantity} />
                         </div>
-                        <div className="col-md-1">
-                            <span>Price</span> 
-                        </div>
-                        <div className="col-md-1">
-                            { parseFloat(parseFloat(el.price) * el.quantity).toFixed(2)}
-                        </div>
+
                     </div>
                 </div>
             )
@@ -55,17 +57,31 @@ const Checkout = (props) => {
     }
 
     return (
-        <div>
-            <div>
-                <h2>{'Checkout'}</h2>
-                { cart.length>0 && renderCart()}
-                { cart.length == 0 && 'Empty Cart'}
-            </div>
-            { cart.length>0 && (<div>{totalCart}</div>)}
-            { cart.length>0 && (<div>
-                <button>Encomendar</button>
-            </div>) || <button onClick={handleBack}>Voltar</button>}
-        </div>
+        <div className="row">
+            <div className="col-12 theme-content-light">
+                <div className="p-30-50">
+                    <h2>Checkout</h2>
+                    {cart.length > 0 && renderCart()}
+                    {cart.length == 0 && 'Empty Cart'}
+                    { cart.length > 0 && 
+                    (<div className="row p-20-0">
+                        <div className="col-11" align="right">Total:</div>
+                        <div className="col-1" align="right">{totalCart}</div>
+                      </div>      
+                    )}
+                    <div className="row">
+                        <div className={ cart.length > 0 && "col-11" || "col-12"} align="right">
+                            <Button shape="round" type="default" onClick={handleBack}>Voltar</Button>
+                        </div>
+                        {cart.length > 0 &&
+                            (<div className="col-1" align="right">
+                                <Button shape="round" className="btn-primary" type="primary">Encomendar</Button>
+                            </div>)
+                        }
+                    </div>
+                    </div>
+                </div>
+            </div> 
     );
 }
 

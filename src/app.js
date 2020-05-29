@@ -10,7 +10,7 @@ export const AppLayout = (componentToRender) => {
   return () => (
     <Layout className="layout">
       <Header className="navbar theme-content-light navbar-expand"> 
-        <h2 className="p-0-60 d-md-block d-none"><Link to="/">Store App</Link></h2>
+        <h2 className="p-10-20 d-md-block d-none"><Link to="/">Store App</Link></h2>
       </Header>
       <Content className="site-layout-content">
           <Component />

@@ -1,7 +1,7 @@
-import React from 'react'
-import { Button } from 'antd';
+import React, { Fragment} from 'react'
+import { Button, Spin } from 'antd';
 
-export const ProductList = ({ products, onAddToCart }) => {
+export const ProductList = ({ pending, products, onAddToCart }) => {
     
     const renderList = () => {
         return (<div className="row"> {
@@ -29,8 +29,9 @@ export const ProductList = ({ products, onAddToCart }) => {
                                     {el.stock &&
                                         (<Button type="default"
                                             shape="round"
+                                            className="btn-default"
                                             block
-                                            onClick={() => onAddToCart(products[j])}>Buy</Button>
+                                            onClick={() => onAddToCart(el)}>Buy</Button>
                                         ) || 'Sold Out'}
                                 </div>
                                 <div className="col-3"></div>
@@ -49,13 +50,12 @@ export const ProductList = ({ products, onAddToCart }) => {
     }
 
     return (
-        <div className="p-30-50">
+        <Fragment>
             <h2>Products</h2>
-            <div className="row">
-                <div className="col-12">
-                {component}
-                </div>
-            </div>
-        </div>
+              {
+                  pending && <div className="loading"><Spin size="middle" /></div>
+                  || ( <div className="row"><div className="col-12">{component}</div></div>)
+              }  
+        </Fragment>
     );
 }

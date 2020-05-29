@@ -1,13 +1,13 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, Fragment } from 'react'
 import { connect } from "react-redux";
 import { fetchProductsPending } from '../actions/products';
 import { addItem } from '../actions/cart';
 import { getProductsError, getProducts, getProductsPending } from '../reducers/products';
 import { CartConnected } from "./Cart";
-import { ProductList }  from "./ProductsList";
+import { ProductList } from "./ProductsList";
 import { debounce } from '../debouncer';
 
-const debounceTime = 300;
+const debounceTime = 200;
 const MainView = (props) => {
     useEffect(() => {
         const { fetchProducts } = props;
@@ -16,20 +16,23 @@ const MainView = (props) => {
 
     const { onAddToCart, pending, products, error } = props;
 
-    if (pending) {
-        return (<p>loading...</p>);
-    }
-
     return (
         <div className="row">
             <div className="col-9 theme-content-light">
-                <ProductList products={products} onAddToCart={onAddToCart} />
-                {error && <span className='product-list-error'>An error ocurred</span>}
+                <div className="p-30-50">
+                    <ProductList pending={pending} products={products} onAddToCart={onAddToCart} />
+                </div>
+                {
+                    error &&
+                    (<div className="row">
+                        <p className='product-list-error'>An error ocurred</p>
+                    </div>)
+                }
             </div>
             <div className="col-3">
                 <div className="card ">
                     <div className="ant-card ant-card-bordered theme-content-light">
-                        <CartConnected />
+                       <CartConnected pending={pending}/>
                     </div>
                 </div>
             </div>
@@ -44,10 +47,10 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => {
-  return {
-    fetchProducts: () => dispatch(fetchProductsPending()),
-    onAddToCart: (product) => debounce(() => dispatch(addItem(product)), debounceTime)
-  }  
+    return {
+        fetchProducts: () => dispatch(fetchProductsPending()),
+        onAddToCart: (product) => debounce(() => dispatch(addItem(product)), debounceTime)
+    }
 }
 
 export const MainViewConnected = connect(mapStateToProps, mapDispatchToProps)(MainView);

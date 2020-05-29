@@ -2,16 +2,12 @@ import { FETCH_PRODUCTS_PENDING, FETCH_PRODUCTS_SUCCESS, FETCH_PRODUCTS_ERROR } 
 
 const initState = {
     products: [],
-    pending: false,
+    pending: true,
     error: false
 }
 
 export default function products(state = initState, action) {
     switch (action.type) {
-        case FETCH_PRODUCTS_PENDING:
-            return Object.assign({}, state, {
-                pending: true
-            })
         case FETCH_PRODUCTS_SUCCESS:
             return Object.assign({}, state, {
                 pending: false,

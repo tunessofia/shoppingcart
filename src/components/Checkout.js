@@ -4,7 +4,7 @@ import { getCart } from '../reducers/cart';
 import { changeItemQuantity, removeItem } from '../actions/cart';
 import { useHistory } from 'react-router-dom';
 import { debounce } from '../debouncer';
-import { Button } from 'antd';
+import { Button, Input } from 'antd';
 import { CloseOutlined } from '@ant-design/icons';
 
 const debounceTime = 300;
@@ -36,7 +36,7 @@ const Checkout = (props) => {
                     <div className="row p-t-10">
                         <div className="col-3">
                             <Button 
-                                className="ghost" 
+                                className="btn-ghost" 
                                 icon={<CloseOutlined />} 
                                 type="default" 
                                 onClick={() => removeItem(el.id)}>Remove</Button>
@@ -45,7 +45,7 @@ const Checkout = (props) => {
                             Qtd
                         </div>
                         <div className="col-1" align="right">
-                            <input className="form-control" type="number" onChange={(e) => changeQuantity(e.target.value, el.id)} value={el.quantity} />
+                            <Input type="number" onChange={(e) => changeQuantity(e.target.value, el.id)} value={el.quantity} />
                         </div>
 
                     </div>
@@ -71,7 +71,7 @@ const Checkout = (props) => {
                     )}
                     <div className="row">
                         <div className={ cart.length > 0 && "col-11" || "col-12"} align="right">
-                            <Button shape="round" type="default" onClick={handleBack}>Voltar</Button>
+                            <Button className="btn-default" shape="round" type="default" onClick={handleBack}>Voltar</Button>
                         </div>
                         {cart.length > 0 &&
                             (<div className="col-1" align="right">

@@ -1,15 +1,15 @@
-import React from "react";
+import React, {Fragment} from "react";
 import { connect } from "react-redux";
 import { useHistory } from 'react-router-dom';
 import { getCart } from '../reducers/cart';
 import { changeItemQuantity, removeItem } from '../actions/cart';
 import { debounce } from '../debouncer';
-import { Button } from 'antd';
+import { Button, Input, Spin } from 'antd';
 import { CloseOutlined } from '@ant-design/icons';
 
 const debounceTime = 300;
 const Cart = (props) => {
-    const { cart } = props;
+    const { cart, pending } = props;
     let totalCart = cart.reduce((acc, el) => acc + (parseFloat(el.price) * el.quantity), 0);
     
     const history = useHistory();
@@ -40,10 +40,12 @@ const Cart = (props) => {
                             Qtd
                         </div>
                         <div className="col-6">
-                            <input className="form-control" type="number" onChange={(e) => changeQuantity(e.target.value, el.id)} value={el.quantity} />
+                        <Input type="number" onChange={(e) => changeQuantity(e.target.value, el.id)} value={el.quantity} />
                         </div>
                         <div className="col-3">
-                            <Button className="ghost" icon={<CloseOutlined />} type="default" onClick={() => removeItem(el.id)} />
+                            <Button className="btn-ghost" icon={<CloseOutlined />} type="default" onClick={() => removeItem(el.id)}>
+                                Remove
+                            </Button>   
                         </div>
                     </div>
                 </div>
@@ -51,7 +53,7 @@ const Cart = (props) => {
         })
 
         if(!items.length){
-            return (<span>empty cart</span>);
+            return (<span>Empty Cart</span>);
         }
 
         return items;
@@ -60,6 +62,7 @@ const Cart = (props) => {
     return (
         <div className="p-30-50">
             <h2>Cart</h2>
+            { pending && <div className="loading"><Spin /></div> || (<Fragment>
             <div className="row">
                 <div className="col-12">
                     {renderCart()}
@@ -82,7 +85,7 @@ const Cart = (props) => {
                                 onClick={handleCheckout}>Checkout</Button> 
                     }
                 </div>
-            </div>
+            </div></Fragment>)}
         </div>
     );
 }

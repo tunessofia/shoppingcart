@@ -11,10 +11,6 @@
 
 // Import styles
 @import 'base';
-
-// Customizations to BS
 @import 'buttons';
-
-// Custom Sidebar
-@import 'navbar';
-@import 'pagination';
+@import 'paddings';
+@import 'loading';

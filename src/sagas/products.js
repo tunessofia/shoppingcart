@@ -1,12 +1,13 @@
 import { call, put } from "redux-saga/effects";
 import { fetchProductsSuccess, fetchProductsError } from '../actions/products';
 import { GET } from "./api";
+import config from "../configs";
 
 // worker saga: makes the api call when watcher saga sees the action
 export default function* workerSagaFetchProducts() {  
     try {
       const products = yield call(() =>
-        fetch('http://localhost:3000/products', GET)
+        fetch(`${config.api.endpoint}/products`, GET)
           .then(response => {
             return response.json()
           }

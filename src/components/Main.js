@@ -6,8 +6,8 @@ import { getProductsError, getProducts, getProductsPending } from '../reducers/p
 import { CartConnected } from "./Cart";
 import { ProductList } from "./ProductsList";
 import { debounce } from '../debouncer';
+import configs from "../configs";
 
-const debounceTime = 200;
 const MainView = (props) => {
     useEffect(() => {
         const { fetchProducts } = props;
@@ -49,7 +49,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => {
     return {
         fetchProducts: () => dispatch(fetchProductsPending()),
-        onAddToCart: (product) => debounce(() => dispatch(addItem(product)), debounceTime)
+        onAddToCart: (product) => debounce(() => dispatch(addItem(product)), configs.timeout)
     }
 }
 

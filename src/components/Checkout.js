@@ -6,8 +6,8 @@ import { useHistory } from 'react-router-dom';
 import { debounce } from '../debouncer';
 import { Button, Input } from 'antd';
 import { CloseOutlined } from '@ant-design/icons';
+import configs from "../configs";
 
-const debounceTime = 300;
 const Checkout = (props) => {
     const { cart } = props;
     let totalCart = cart.reduce((acc, el) => acc + (parseFloat(el.price) * el.quantity), 0);
@@ -91,7 +91,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
     return {
-        changeQuantity: (quantity, productId) => debounce(() => dispatch(changeItemQuantity(quantity, productId)), debounceTime),
+        changeQuantity: (quantity, productId) => debounce(() => dispatch(changeItemQuantity(quantity, productId)), configs.timeout),
         removeItem: (productId) => dispatch(removeItem(productId))
     }
 }

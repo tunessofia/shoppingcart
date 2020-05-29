@@ -4,6 +4,7 @@ const path = require('path');
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const outputPath = path.resolve(__dirname, './public');
 
@@ -28,6 +29,9 @@ module.exports = (env, options) => {
       historyApiFallback: true,
       contentBase: './',
       hot: true
+    },
+    optimization: {
+      minimizer: [new UglifyJsPlugin()],
     },
     module: {
       rules: [

@@ -5,31 +5,17 @@ const HtmlWebPackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
-function absPath() {
-  let tmp = [__dirname].concat(Array.prototype.slice.call(arguments));
-  return path.join.apply(path, tmp);
-}
-
-function srcPath() {
-  let args = ['src'].concat(Array.prototype.slice.call(arguments));
-  return absPath.apply(this, args);
-}
-
-const indexJsPath = srcPath('index.js');
-const templateHtmlPath = absPath('resources', 'template.html');
-const indexHtmlOutputPath = absPath('public', 'index.html');
-const bundleOutputPath = absPath('public');
+const outputPath = path.resolve(__dirname, './public');
 
 module.exports = (env, options) => {
   const isDevelopment = options.mode === 'development';
   return {
-    entry: {
-      main: indexJsPath
-    },
+    entry: `${__dirname}/src/index.js`,
     output: {
-      path: bundleOutputPath,
-      filename: isDevelopment ? 'bundle.js' : 'bundle.[contenthash].js',
-    },
+      path: outputPath,
+      filename: isDevelopment ? 'bundle.js' : 'bundle.[contenthash].js'
+    }
+    ,
     performance: {
       hints: false
     },
@@ -88,7 +74,7 @@ module.exports = (env, options) => {
       }),
       new OptimizeCSSAssetsPlugin({}),
       new HtmlWebPackPlugin({
-        template: templateHtmlPath,
+        template: `${__dirname}/resources/template.html`,
         minify: true,
         filename: 'index.html',
         title: 'Store App',

@@ -86,6 +86,7 @@ input:hover {
 img {
   width: 200px;
   height: 200px;
+  max-width: 95%;
 }
 
 .layout-full {
@@ -140,4 +141,5 @@ img {
   float:right;
   touch-action: none;
   transform: translate(0px, 0px);
+  max-width: 95%;
 }

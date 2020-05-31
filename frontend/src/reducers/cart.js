@@ -28,6 +28,10 @@ const removeItem = (state, item) => {
 const changeItemQuantity = (state, data) => {
     const cart = Object.assign([], state);
     const itemIdx = cart.map(e => e.id).indexOf(data.itemId);
+    if(!data.quantity || data.quantity < 0){
+        data.quantity = 0;
+    }
+
     cart[itemIdx].quantity = parseInt(data.quantity);
     return cart;
 }

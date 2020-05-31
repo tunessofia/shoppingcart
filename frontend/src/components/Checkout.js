@@ -45,7 +45,7 @@ const Checkout = (props) => {
                             Qtd
                         </div>
                         <div className="col-1" align="right">
-                            <Input type="number" onChange={(e) => changeQuantity(e.target.value, el.id)} value={el.quantity} />
+                            <Input required min="0"  type="number" onChange={(e) => changeQuantity(e.target.value, el.id)} value={el.quantity} />
                         </div>
 
                     </div>

@@ -21,13 +21,9 @@ const MainView = (props) => {
             <div className="col-9 theme-content-light">
                 <div className="p-30-50">
                     <ProductList pending={pending} products={products} onAddToCart={onAddToCart} />
+                    { error && (<p className='product-list-error'>An error ocurred</p>)
+                    }
                 </div>
-                {
-                    error &&
-                    (<div className="row">
-                        <p className='product-list-error'>An error ocurred</p>
-                    </div>)
-                }
             </div>
             <div className="col-3">
                 <div className="card ">

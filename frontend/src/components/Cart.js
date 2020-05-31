@@ -40,7 +40,7 @@ const Cart = (props) => {
                             Qtd
                         </div>
                         <div className="col-6">
-                        <Input type="number" onChange={(e) => changeQuantity(e.target.value, el.id)} value={el.quantity} />
+                        <Input required min="0" type="number" onChange={(e) => changeQuantity(e.target.value, el.id)} value={el.quantity} />
                         </div>
                         <div className="col-3">
                             <Button className="btn-ghost" icon={<CloseOutlined />} type="default" onClick={() => removeItem(el.id)}>

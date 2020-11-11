@@ -8,7 +8,7 @@ import { Button, Input, Spin } from 'antd';
 import { CloseOutlined } from '@ant-design/icons';
 import configs from "../configs";
 
-const Cart = (props) => {
+export const Cart = (props) => {
     const { cart, pending } = props;
     let totalCart = cart.reduce((acc, el) => acc + (parseFloat(el.price) * el.quantity), 0);
     
@@ -52,10 +52,6 @@ const Cart = (props) => {
             )
         })
 
-        if(!items.length){
-            return (<span>Empty Cart</span>);
-        }
-
         return items;
     }
 
@@ -65,7 +61,7 @@ const Cart = (props) => {
             { pending && <div className="loading"><Spin /></div> || (<Fragment>
             <div className="row">
                 <div className="col-12">
-                    {renderCart()}
+                    { cart.length>0 && renderCart() || (<span>Empty Cart</span>) }
                 </div>
             </div>
             <div className="row p-20-0">

@@ -1,23 +1,22 @@
 import { ADD_ITEM, REMOVE_ITEM, CHANGE_ITEM_QUANTITY } from '../actions/cart';
 
-const addItem = (state, item) => {
+const addItem = (state, itemId) => {
     const cart = Object.assign([], state);
-    const itemIdx = cart.map(e => e.id).indexOf(item.id);
+    const itemIdx = cart.map(e => e.id).indexOf(itemId);
     if ( itemIdx !== -1) {
         cart[itemIdx].quantity +=1; 
     }
     else {
-        item.quantity = 1;
-        cart.push(item)
+        cart.push({ id: itemId, quantity: 1});
     }
 
     return cart;
 }
 
-const removeItem = (state, item) => {
+const removeItem = (state, itemId) => {
     debugger;
     const cart = Object.assign([], state);
-    const itemIdx = cart.map(e => e.id).indexOf(item);
+    const itemIdx = cart.map(e => e.id).indexOf(itemId);
     if ( itemIdx !== -1) {
         cart.splice(itemIdx,1); 
     }
@@ -28,7 +27,7 @@ const removeItem = (state, item) => {
 const changeItemQuantity = (state, data) => {
     const cart = Object.assign([], state);
     const itemIdx = cart.map(e => e.id).indexOf(data.itemId);
-    if(!data.quantity || data.quantity < 0){
+    if(!data.itemQuantity || data.itemQuantity < 0){
         data.quantity = 0;
     }
 

@@ -16,9 +16,9 @@ export function removeItem(itemId){
     }
 }
 
-export function changeItemQuantity(quantity, itemId){
+export function changeItemQuantity(itemQuantity, itemId){
     return {
         type: CHANGE_ITEM_QUANTITY,
-        payload: { quantity: quantity, itemId: itemId }
+        payload: { itemQuantity: itemQuantity, itemId: itemId }
     }
 }

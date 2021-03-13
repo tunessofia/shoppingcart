@@ -1,4 +1,4 @@
-Small project done for a code challenge where it was asked to create a beer store. For support has a dummy backend. 
+Small project simulating a beer store. For support has a dummy backend. 
 
 Done using:
 - React

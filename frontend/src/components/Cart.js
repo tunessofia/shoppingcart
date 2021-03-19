@@ -10,7 +10,7 @@ import configs from "../configs";
 
 export const Cart = (props) => {
     const { cart, pending } = props;
-    let totalCart = cart.reduce((acc, el) => acc + (parseFloat(el.price) * el.quantity), 0);
+    let totalCart = cart.reduce((acc, el) => acc + (parseFloat(el.item.price) * el.quantity), 0);
     
     const history = useHistory();
     const handleCheckout = () => {
@@ -24,7 +24,7 @@ export const Cart = (props) => {
                 <div key={idx} className="p-10-0">
                     <div className="row">
                         <div className="col-12">
-                            {el.title} - {el.brand}
+                            {el.item.title} - {el.item.brand}
                         </div>
                     </div>
                     <div className="row">
@@ -32,7 +32,7 @@ export const Cart = (props) => {
                             <span>Price</span>
                         </div>
                         <div className="col-10">
-                            <span>{parseFloat(el.price)}/un</span>
+                            <span>{parseFloat(el.item.price)}/un</span>
                         </div>
                     </div>
                     <div className="row">
@@ -40,10 +40,10 @@ export const Cart = (props) => {
                             Qtd
                         </div>
                         <div className="col-6">
-                        <Input required min="0" type="number" onChange={(e) => changeQuantity(e.target.value, el.id)} value={el.quantity} />
+                        <Input required min="0" type="number" onChange={(e) => changeQuantity(e.target.value, el.item.id)} value={el.quantity} />
                         </div>
                         <div className="col-3">
-                            <Button className="btn-ghost" icon={<CloseOutlined />} type="default" onClick={() => removeItem(el.id)}>
+                            <Button className="btn-ghost" icon={<CloseOutlined />} type="default" onClick={() => removeItem(el.item.id)}>
                                 Remove
                             </Button>   
                         </div>

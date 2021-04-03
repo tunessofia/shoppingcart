@@ -2,10 +2,10 @@ export const ADD_ITEM   = 'ADD_ITEM';
 export const REMOVE_ITEM = 'REMOVE_ITEM';
 export const CHANGE_ITEM_QUANTITY = 'CHANGE_ITEM_QUANTITY';
 
-export function addItem(itemId){
+export function addItem(item){
     return {
         type: ADD_ITEM,
-        payload: { itemId: itemId }
+        payload: { item: item }
     }
 }
 

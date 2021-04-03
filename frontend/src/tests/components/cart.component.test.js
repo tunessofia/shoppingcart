@@ -15,7 +15,7 @@ describe('cart component test', () => {
 
     it('renders correctly on non empty cart', () => {
 
-        const cart = [{id:1, quantity:1 }];
+        const cart = [{item:{id:1, price:"1.89"}, quantity:1 }];
 
         const wrapper = shallow(
             <Cart cart={cart} pending={false} />

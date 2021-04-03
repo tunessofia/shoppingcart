@@ -10,7 +10,7 @@ import configs from "../configs";
 
 const Checkout = (props) => {
     const { cart } = props;
-    let totalCart = cart.reduce((acc, el) => acc + (parseFloat(el.price) * el.quantity), 0);
+    let totalCart = cart.reduce((acc, el) => acc + (parseFloat(el.item.price) * el.quantity), 0);
 
     const history = useHistory();
     const handleBack = () => {
@@ -24,13 +24,13 @@ const Checkout = (props) => {
                 <div key={idx} className="p-10-0">
                     <div className="row">
                         <div className="col-8">
-                            {el.title} - {el.brand}
+                            {el.item.title} - {el.item.brand}
                         </div>
                         <div className="col-3" align="right">
                             <span>Price</span>
                         </div>
                         <div className="col-1" align="right">
-                            <span>{parseFloat(el.price)}/un</span>
+                            <span>{parseFloat(el.item.price)}/un</span>
                         </div>
                     </div>
                     <div className="row p-t-10">
@@ -39,13 +39,13 @@ const Checkout = (props) => {
                                 className="btn-ghost" 
                                 icon={<CloseOutlined />} 
                                 type="default" 
-                                onClick={() => removeItem(el.id)}>Remove</Button>
+                                onClick={() => removeItem(el.item.id)}>Remove</Button>
                         </div>
                         <div className="col-8" align="right">
                             Qtd
                         </div>
                         <div className="col-1" align="right">
-                            <Input required min="0"  type="number" onChange={(e) => changeQuantity(e.target.value, el.id)} value={el.quantity} />
+                            <Input required min="0"  type="number" onChange={(e) => changeQuantity(e.target.value, el.item.id)} value={el.quantity} />
                         </div>
 
                     </div>

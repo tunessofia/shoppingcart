@@ -1,3 +1,13 @@
+Small project simulating a beer store. For support has a dummy backend. 
+
+Done using:
+- React
+- Redux
+- Saga
+- Webpack
+- Jest
+- Enzyme
+
 #to install packages
 cd backend
 npm install

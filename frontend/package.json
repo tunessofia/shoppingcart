@@ -68,6 +68,8 @@
     "testMatch": [
       "**/src/tests/**/?(*.)(test).js?(x)"
     ],
-    "setupFilesAfterEnv": ["<rootDir>/src/tests/setupTests.js"]
+    "setupFilesAfterEnv": [
+      "<rootDir>/src/tests/setupTests.js"
+    ]
   }
 }
